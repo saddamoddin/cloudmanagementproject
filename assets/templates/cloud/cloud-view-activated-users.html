@@ -1,0 +1,269 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>cloud</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="" sizes="16x16" href="{% static 'admincss/images/cloud_left.png' %}">
+    <!-- Pignose Calender -->
+    <link href="{% static 'admincss/plugins/pg-calendar/css/pignose.calendar.min.css' %}" rel="stylesheet">
+    <!-- Chartist -->
+    <link rel="stylesheet" href="{% static 'admincss/plugins/chartist/css/chartist.min.css' %}">
+    <link rel="stylesheet" href="{% static 'admincss/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css' %}">
+    <!-- Custom Stylesheet -->
+    <link href="{% static 'admincss/css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+            </svg>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+    
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+        <!-- <div class="nav-header">
+            <div class="brand-logo">
+                <a href="/admin/admin-index.html">
+                    <b class="logo-abbr"><img src="" alt=""> </b>
+                    <span class="logo-compact"> </span>
+                    <span style="color:white;font-weight:bold">
+                         Admin
+                    </span>
+                </a>
+            </div>
+        </div> -->
+        <!-- <div class="nav-header">
+            <div class="brand-logo">
+                <a href="/admin/admin-index.html">
+                    <b style="color:white"><i class="fa fa-user-circle"></i></b>
+                    <span class="logo-compact"><img src="/images/cloud_left_full.png" alt=""></span>
+                    <span class="brand-title" style="color:white;font-size:25px;">
+                        Admin
+                    </span>
+                </a>
+            </div>
+        </div> -->
+
+        <div class="nav-header">
+            <div class="brand-logo">
+                <a href="{% url 'cloud-index' %}">
+                    <b style="color:white"><i class="fa fa-cloud"></i></b>
+                    <span class="logo-compact"><img src="{% static 'admincss/images/cloud_left_full.png' %}" alt=""></span>
+                    <span class="brand-title" style="color:white;font-size:25px;">
+                        cloud
+                    </span>
+                </a>
+            </div>
+        </div>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+
+        <!--**********************************
+            Header start
+        ***********************************-->
+        <div class="header">    
+            <div class="header-content clearfix">
+                
+                <div class="nav-control">
+                    <div class="hamburger">
+                        <span class="toggle-icon"><i class="icon-menu"></i></span>
+                    </div>
+                </div>
+                
+                <div class="header-left">
+                    <div class="input-group icons">
+                        
+                        <form method="POST">
+                        {% csrf_token %}
+                        <div class="input-group-prepend">
+                            <input type="search" name="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard">
+                            <button type="submit" class="input-group-text bg-transparent border-0 pr-2 pr-sm-3 ml-2" id="basic-addon1"><i class="mdi mdi-magnify"></i></button>
+                        </div>
+                        </form>
+                        <div class="drop-down animated flipInX d-md-none">
+                            <form action="#">
+                                <input type="text" class="form-control" placeholder="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div class="nk-sidebar">           
+            <div class="nk-nav-scroll">
+                <ul class="metismenu" id="menu">
+                    
+                    <li>
+                        <a  href="{% url 'cloud-index' %}" aria-expanded="false">
+                            <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
+                        </a>
+        
+                    </li>
+                    <li>
+                        <a  href="{% url 'cloud-authorization' %}" aria-expanded="false">
+                            <i class="fa fa-user-circle "></i><span class="nav-text">User Authorization</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a  href="{% url 'cloud-activated-users' %}" aria-expanded="false">
+                            <i class="fa fa-folder-open menu-icon"></i><span class="nav-text">Activated Users</span>
+                        </a>
+        
+                    </li>
+                    {% comment %} <li>
+                        <a  href="{% url 'cloud-access-control' %}" aria-expanded="false">
+                            <i class="fa fa-users "></i><span class="nav-text">Access Control</span>
+                        </a>
+                        
+                    </li>   {% endcomment %}
+
+
+                    <li>
+                        <a  href="{% url 'cloud-user-request' %}" aria-expanded="false">
+                            <i class="fa fa-paper-plane"></i><span class="nav-text">User Request</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+
+            
+            <!-- row -->
+
+            <div class="container-fluid"><div class="row mt-3">
+                <div class="col-12">
+                   <h1 style="background-color:rgb(99, 36, 158);border-radius:6px;color:white;font-family:sans-serif;text-align:center;font-size:23px;padding:9px;font-weight:bold;">Activated Users</h1>
+                </div>
+
+              </div>
+
+
+
+                
+              <div class="row mt-4">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body" style="overflow:auto">
+                            <div class="active-member">
+                                <div class="table-responsive">
+                                    <table class="table table-xs mb-0">
+                                        <thead>
+                                            <tr>
+                                               
+                                                <th>Photo</th>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Contact</th>
+                                                <th>Date of birth</th>
+                                                <th>Location</th>
+                                               
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                            {% for i in data %} 
+
+                                            <tr>
+                                                <td><img src="media/{{i.user_profile}}" class=" rounded-circle mr-3"  alt=""></td>
+                                                <td>{{i.user_name}}</td>
+                                                <td>
+                                                    <span>{{i.user_email}}
+
+                                                    </span>
+                                                </td>
+                                                
+                                                <td><span>{{i.user_contact}}</span></td>
+                                                <td><span>{{i.user_dob}}</span></td>
+                                                <td><span>{{i.user_state}}</span></td> 
+                                            </tr>
+                                            {% endfor %}
+ 
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                        
+                </div>
+            </div>
+
+                
+            </div>
+            <!-- #/ container -->
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        
+        
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <div class="footer">
+            <div class="copyright">
+                <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script src="{% static 'admincss/plugins/common/common.min.js' %}"></script>
+    <script src="{% static 'admincss/js/custom.min.js' %}"></script>
+    <script src="{% static 'admincss/js/settings.js' %}"></script>
+    <script src="{% static 'admincss/js/gleek.js' %}"></script>
+    <script src="{% static 'admincss/js/styleSwitcher.js' %}"></script>
+    <script src="{% static 'admincss/plugins/tables/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'admincss/plugins/tables/js/datatable/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'admincss/plugins/tables/js/datatable-init/datatable-basic.min.js' %}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+<title>Profile</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="HostSpace template project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{%static 'maincss/styles/bootstrap-4.1.2/bootstrap.min.css' %}">
+<link href="{%static 'maincss/plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{%static 'maincss/plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+<link rel="stylesheet" type="text/css" href="{%static 'maincss/plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+<link rel="stylesheet" type="text/css" href="{%static 'maincss/plugins/OwlCarousel2-2.2.1/animate.css' %}">
+<link href="{%static 'maincss/plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css' %}">
+<link rel="stylesheet" type="text/css" href="{%static 'maincss/styles/about.css' %}">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{%static 'maincss/styles/about_responsive.css' %}">
+<script type="text/javascript">
+	function validate(){
+	  var name = document.myform.name
+	  var email = document.myform.email
+	  var emailpattern = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([com\co\.\in])+$/; // to validate email id
+	  var datepattern =  /^\d{4}-\d{2}-\d{2}$/;
+	  var letter = /[a-z]/;
+	  var upper = /[A-Z]/;
+	  var number = /[0-9]/; 
+	  var state = document.myform.state
+	  var contact = document.myform.contact
+	  var date_of_birth = document.myform.birth
+	  var password = document.myform.password
+	  var confirm = document.myform.confirm
+  
+	
+	  if (name.value.length <= 0) {
+		alert("Name can't be blank");
+		name.focus();
+		return false;
+		
+	  }
+	  if (email.value.length <= 0) {
+		alert("Enter your email id");
+		email.focus();
+		return false;
+		
+	  }
+	  if(!email.value.match(emailpattern)){
+		alert("Invalid Email format"); 
+		email.focus();            
+		return false;
+	  }
+	 
+	 
+	  if (contact.value.length <= 0) {
+		alert("Enter your mobile number");
+		contact.focus();
+		return false;
+		
+	  }
+	  if(isNaN(contact.value)){
+		alert("Invalid Mobile number");
+		return false;
+	  }
+	  if(contact.value.length=="" || contact.value.length!=10){
+		alert("Invalid Mobile number");
+		return false;
+	  }
+	  if(state.value == "Select State"){
+		alert("select state");
+		return false;
+	  }
+	  if(!date_of_birth.value.match(datepattern )){
+		alert("Date pattern incorrect, it should match the following pattern: YYYY-MM-DD"); 
+		date_of_birth.focus();            
+		return false;
+	 }
+	  if(date_of_birth.value.length <= 0) {
+		alert("Enter your date of birth");
+		date_of_birth.focus();
+		return false;
+		
+	  }
+	  if (profile.value.length == "") {
+		alert("upload  profile image");
+		profile.focus();
+		return false;
+		
+	  }
+	  if (password.value.length <= 0) {
+		alert("Enter your password");
+		password.focus();
+		return false;
+		
+	  }
+	  if (!letter.test(password.value)) {
+		alert("Please make sure password includes a lowercase letter.");
+		password.focus();
+		return false;
+		
+	  }
+	  if (!upper.test(password.value)) {
+		alert("Please make sure password includes a uppercase letter.");
+		password.focus();
+		return false;
+		
+	  }
+	  if (!number.test(password.value)) {
+		alert("Please make sure password Includes a Digit.");
+		password.focus();
+		return false;
+		
+	  }
+	  if (confirm.value.length <= 0) {
+		alert("confirm your password");
+		confirm.focus();
+		return false;
+		
+	  }
+	  if(confirm.value != password.value){
+		alert("password and confirm password must match");            
+		return false;
+	  }	
+	
+	}
+</script>
+</head>
+<body>
+
+<div class="super_container">
+	
+	<!-- Header -->
+
+	<header class="header trans_400">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="header_content d-flex flex-row align-items-center justify-content-start trans_400">
+						<div class="logo"><a href="#">Host<span>Space</span></a></div>
+						<nav class="main_nav ml-auto ">
+							<ul class="d-flex flex-row align-items-center justify-content-start">
+								<li class=""><a href="{% url 'user-index' %}">Home</a></li>
+								<li class="active"><a href="{% url 'user-profile' %}">Profile</a></li>
+								<li class=""><a href="{% url 'user-file-rights' %}">My Rights</a></li>
+                                <li class=""><a href="{% url 'user-file-upload' %}">Upload</a></li>
+								<li class=""><a href="{% url 'user-file-download' %}">Download</a></li>
+								<li><a href="{% url 'index' %}">Logout</a></li>
+							</ul>
+						</nav>
+						
+						<div class="hamburger ml-auto"><i class="fa fa-bars" aria-hidden="true"></i></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<!-- Menu -->
+	<div class="menu_overlay trans_400"></div>
+	<div class="menu trans_400">
+		<div class="menu_close_container"><div class="menu_close"><div></div><div></div></div></div>
+		<div class="log_reg">
+			<div class="log_reg_content d-flex flex-row align-items-center justify-content-end">
+				<div class=""><a href="#" style="color:white;font-weight:bold;font-size:23px;">Host<span style="color:aqua">Space</span></a></div>
+			</div>
+		</div>
+		<nav class="menu_nav">
+			<ul>
+				<li class="active"><a href="{% url 'user-index' %}">Home</a></li>
+				<li class=""><a href="{% url 'user-profile' %}">Profile</a></li>
+				<li class=""><a href="{% url 'user-file-rights' %}">My Rights</a></li>
+				<li class=""><a href="{% url 'user-file-upload' %}">Upload</a></li>
+				<li class=""><a href="{% url 'user-file-download' %}">Download</a></li>
+				<li><a href="{% url 'index' %}">Logout</a></li>
+			</ul>
+		</nav>
+	</div>
+
+	<!-- Home -->
+
+	<div class="home">
+		<div class="home_background"></div>
+		<div class="background_image background_city" style="background-image:url({%static 'maincss/images/city_5.png' %})"></div>
+		<div class="cloud cloud_1"><img src="{%static 'maincss/images/cloud_left.png' %}" alt=""></div>
+		<div class="cloud cloud_2"><img src="{%static 'maincss/images/cloud_left.png' %}" alt=""></div>
+		<div class="cloud cloud_3"><img src="{%static 'maincss/images/cloud_left_full.png' %}" alt=""></div>
+		<div class="cloud cloud_4"><img src="{%static 'maincss/images/cloud_left.png' %}" alt=""></div>
+		<div class="home_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="home_content">
+							<div class="home_title">Profile</div>
+							<div class="breadcrumbs">
+								<ul class="d-flex flex-row align-items-center justify-content-start">
+									<li><a href="{% url 'index' %}">Home</a></li>
+									<li>profile</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Domain Search -->
+
+	
+
+	<!-- Contact -->
+    
+	<section class="section doctor-single m-5">
+		
+		<div class="container-fluid">
+	
+			<div class="row" >
+
+				
+				<div class="col-md-12">
+				<div class="contact_title text-center m-5" style="color:blueviolet;font-family:roboto;text-decoration:underline;font-size:25px;font-weight:bold">Profile</div>
+			 <div class="row">
+				 
+				 <div class="col-xl-4">
+					 <!-- Profile picture card-->
+					 <div class="card mb-4 mb-xl-0">
+						 <div class="card-header">Profile Picture</div>
+						 <div class="card-body text-center">
+							 <img class="img-account-profile rounded-circle mb-2" src="" alt="">
+							 <div class="small font-italic text-muted mb-4">
+								 {% for i in data %}
+								<img style="width:140px;max-width:180px;border-radius:100px" src="media/{{i.user_profile}}" alt="" class="img-fluid w-60">
+								
+								<h5 style="margin:7px;color:#535860">{{i.user_name}}</h5>
+								<h5 style="color:#535860">{{i.user_email}}</h5>
+								{% endfor %}
+							 </div>
+							 
+						 </div>
+					 </div>
+				 </div>
+				 <div class="col-xl-8">
+					 <!-- Account details card-->
+					 <div class="card mb-4">
+						 <div class="card-header">Account Details</div>
+						 <div class="card-body">
+							 <form method = 'post' enctype="multipart/form-data" onsubmit='return validate()' name = "myform">
+								 {% csrf_token %}
+								{% for i in data %}
+								{% if messages %}              
+								{% for message in messages %}
+								{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+										  <script>swal({
+											title: "Error!",
+											text: "{{message}}",
+											icon: "warning",
+											button: "OK",
+										  });
+										</script>
+									   
+									  {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+										  <script>swal({
+											title: "Success :)",
+											text: "{{message}}",
+											icon: "success",
+											button: "OK",
+										  });
+										</script>
+									  {% endif %}              
+									{% endfor %} 
+								   {% endif %}
+								 <div class="row gx-3 mb-3">
+									 <!-- Form Group (first name)-->
+									 <div class="col-md-6">
+										 <label class="small mb-1" for="inputFirstName">Name</label>
+										 <input class="form-control-file p-2"  name="name" id="inputFirstName" type="text" placeholder="Enter your fullname" value="{{i.user_name}}">
+									 </div>
+									 <!-- Form Group (last name)-->
+									 <div class="col-md-6"> 
+										 <label class="small mb-1" for="inputLastName">Email</label>
+										 <input class="form-control-file p-2"  name="email" id="inputLastName" type="text" placeholder="Enter your email" value="{{i.user_email}}">
+									 </div>
+								 </div>
+	
+								 <div class="row gx-3 mb-3">
+									 <!-- Form Group (organization name)-->
+									 <div class="col-md-6">
+										 <label class="small mb-1" >Contact</label>
+										 <input class="form-control-file p-2" name="contact" type="text" placeholder="Enter your contact" value="{{i.user_contact}}">
+									 </div>
+									 <!-- Form Group (location)-->
+									 <div class="col-md-6">
+										<label class="small mb-1" for="inputOrgName">Location</label>
+										<select class="form-control-file p-2"  name="state" id="inputOrgName" type="text" placeholder="Enter your location" >
+											<option hidden>{{i.user_state}}</option>
+											<option>Andhra Pradesh</option>
+											<option>Karnataka</option>
+											<option>Tamil Nadu</option>
+											<option>Kerala</option>
+											<option>DELHI</option>
+											<option>Maharashtra</option>
+											<option>Gujarat</option>
+											<option>Madhya Pradesh</option>
+											<option>Telangana</option>
+											<option>Uttar Pradesh</option>
+											<option>West Bengal</option>
+											<option>Chandigarh</option>
+											<option>Himachal Pradesh</option>		
+										</select>
+									</div>
+								 </div>
+								 
+								
+								
+	
+								 <div class="row gx-3 mb-3">
+									<div class="col-md-6"> 
+										<label class="small mb-1" for="inputLastName">Date of birth</label>
+										<input class="form-control-file p-2"  name="birth" id="inputLastName" type="text" placeholder="Enter your email" value="{{i.user_dob | date:'Y-m-d'}}">
+									</div>
+									<div class="col-md-6" >
+										<label class="small mb-1" for="inputLocation">Upload new image</label>
+										<input class="form-control-sm w-100 p-2" style="border:solid 1px rgb(128, 126, 126)" name="user_profile"  id="inputLocation" type="file" />
+									</div>
+								</div>
+								{% endfor %}
+								 <button class="btn btn-primary" type="submit">Save changes</button>
+							 </form>
+						 </div>
+					 </div>
+				 </div>
+			 </div>
+			 
+		 </div>
+		 </div>
+			  </div>
+		
+	</section>
+	
+
+	<!-- Footer -->
+
+	<footer class="footer magic_fade_in">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 footer_col">
+					<div class="footer_links">
+						<div class="row">
+							<div class="col-sm-6 col-md-3 footer_list_col magic_fade_in">
+								<div class="footer_list_container">
+									<div class="footer_list_title">Hosting Options</div>
+									<ul class="footer_list">
+										<li><a href="#">Web Hosting</a></li>
+										<li><a href="#">WordPress Hosting</a></li>
+										<li><a href="#">VPS Hosting</a></li>
+										<li><a href="#">Cloud Server</a></li>
+										<li><a href="#">Reseller Package</a></li>
+										<li><a href="#">Dedicated Hosting</a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-sm-6 col-md-3 footer_list_col magic_fade_in">
+								<div class="footer_list_container">
+									<div class="footer_list_title">Domains</div>
+									<ul class="footer_list">
+										<li><a href="#">Buy a Domain</a></li>
+										<li><a href="#">Premium Domain Names</a></li>
+										<li><a href="#">Web Hosting</a></li>
+										<li><a href="#">Transfer Your Domain</a></li>
+										<li><a href="#">Domain Marketplace</a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-sm-6 col-md-3 footer_list_col magic_fade_in">
+								<div class="footer_list_container">
+									<div class="footer_list_title">Resellers</div>
+									<ul class="footer_list">
+										<li><a href="#">VPS Hosting</a></li>
+										<li><a href="#">Cloud Server</a></li>
+										<li><a href="#">Reseller Package</a></li>
+										<li><a href="#">Dedicated Hosting</a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-sm-6 col-md-3 footer_list_col magic_fade_in">
+								<div class="footer_list_container">
+									<div class="footer_list_title">Support</div>
+									<ul class="footer_list">
+										<li><a href="#">Buy a Domain</a></li>
+										<li><a href="#">Premium Domain Names</a></li>
+										<li><a href="#">Web Hosting</a></li>
+									</ul>
+								</div>	
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</footer>
+</div>
+
+<script src="{%static 'maincss/js/jquery-3.2.1.min.js' %}"></script>
+<script src="{%static 'maincss/styles/bootstrap-4.1.2/popper.js' %}"></script>
+<script src="{%static 'maincss/styles/bootstrap-4.1.2/bootstrap.min.js' %}"></script>
+<script src="{%static 'maincss/plugins/greensock/TweenMax.min.js' %}"></script>
+<script src="{%static 'maincss/plugins/greensock/TimelineMax.min.js' %}"></script>
+<script src="{%static 'maincss/plugins/scrollmagic/ScrollMagic.min.js' %}"></script>
+<script src="{%static 'maincss/plugins/greensock/animation.gsap.min.js' %}"></script>
+<script src="{%static 'maincss/plugins/greensock/ScrollToPlugin.min.js' %}"></script>
+<script src="{%static 'maincss/plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+<script src="{%static 'maincss/plugins/easing/easing.js' %}"></script>
+<script src="{%static 'maincss/plugins/progressbar/progressbar.min.js' %}"></script>
+<script src="{%static 'maincss/plugins/parallax-js-master/parallax.min.js' %}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script>
+<script src="{%static 'maincss/js/contact.js' %}"></script>
+</body>
+</html>
+

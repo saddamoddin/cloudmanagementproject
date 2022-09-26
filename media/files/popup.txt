@@ -1,0 +1,166 @@
+ <div class="main-panel">
+            <div class="content-wrapper pb-0">
+              <div class="page-header flex-wrap">
+                
+                <div>
+                  <button type="button" class="btn btn-sm ml-3 btn-success">View Doctors</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-12 col-sm-12 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body px-0 overflow-auto">
+                      
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead class="bg-light">
+                            <tr>
+                              <th>ID.NO</th>
+                                <th>Profile</th>
+                                <th>Full Name</th>
+                                <th>Email</th>
+                                <th>Contact</th>
+                                <th>Speciality</th>
+                                <th>Status</th>
+                                <th>View</th>
+                                <th>Action</th>
+                            </tr>
+                            
+                          </thead>
+                          <tbody>
+                            {% for p in profile %}
+                           
+                            <tr>
+                              <td>{{ p.doctor_id }}</td>
+                              <td class="py-1">
+                                <img src="media/{{ p.doctor_profile }}" alt="image" />
+                              </td>
+                              <td>{{ p.doctor_name }}</td>
+                              
+                              <td>{{ p.doctor_email }}</td>
+                              <td>{{ p.doctor_contact }}</td>
+                              <td>{{ p.doctor_specialization }}</td>
+                              <td>
+                               <h5 class="text-info">{{p.status}}</h5>
+                              </td>
+                              <td>
+
+                        
+                                <div class="d-flex align-items-center">
+                                    <div style="margin:4px;background-color:rgb(72, 190, 190);width:30px;border-radius:40px;height:30px;display: flex;justify-content: center;align-items: center;">
+                                  
+                                        <i class="mdi mdi-eye" data-toggle="modal" data-target="#doctor_details" style="color:white;font-size:18px"></i>
+                                      </div> 
+                
+                                <div class="modal fade" id="doctor_details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                                <div  style="background-color:white;padding:8px;border-radius:12px;">
+                                                    <h1 style="text-align:center;font-family:sans-serif;margin:8px;color:rgb(17, 8, 68);padding:0px;">Doctor Details</h1>
+                                                    <div class="col-12" style="padding:0px">
+                                                    <hr>
+                                                </div>
+                                        <div class="row" style="display:flex;flex-direction:column;justify-content:space-around;">
+                                        
+                                        <div class="col-12" style="display:flex;justify-content:space-around;padding:8px">
+                                        <h4 style="font-family:italic;color:rgb(89, 88, 92)">Full Name</h4>
+                                        <h4 style="font-family:italic;color:rgb(10, 46, 87)">Dr. Manuel</h4>
+                                        
+                                        </div>
+                                        <div class="col-12">
+                                        <hr style="height:1px;margin:0px;">
+                                    </div>
+                
+                                    <div class="col-12" style="display:flex;justify-content:space-around;padding:8px">
+                                        <h4 style="font-family:italic;color:rgb(89, 88, 92)">Contact Number</h4>
+                                        <h4 style="font-family:italic;color:rgb(10, 46, 87)">976584774</h4>
+                                        
+                                    </div>
+                                    <div class="col-12">
+                                    <hr style="height:1px;margin:0px;">
+                                </div>
+                
+                                <div class="col-12" style="display:flex;justify-content:space-around;padding:8px">
+                                    <h4 style="font-family:italic;color:rgb(89, 88, 92)">Gender</h4>
+                                    <h4 style="font-family:italic;color:rgb(10, 46, 87)">Male</h4>
+                                    
+                                </div>
+                                <div class="col-12">
+                                <hr style="height:1px;margin:0px;">
+                            </div>
+                
+                                    
+                            <div class="col-12" style="display:flex;justify-content:space-around;padding:8px">
+                                <h4 style="font-family:italic;color:rgb(89, 88, 92)">Address</h4>
+                                <h4 style="font-family:italic;color:rgb(10, 46, 87)">Hyderabad</h4>
+                                
+                            </div>
+                            <div class="col-12">
+                            <hr style="height:1px;margin:0px;">
+                        </div>
+                
+                        <div class="col-12" style="display:flex;justify-content:space-around;padding:8px">
+                            <h4 style="font-family:italic;color:rgb(89, 88, 92)">Specialist</h4>
+                            <h4 style="font-family:italic;color:rgb(10, 46, 87)">Neurologists</h4>
+                            
+                        </div>
+                        <div class="col-12">
+                            <hr style="height:1px;margin:0px;">
+                        </div>
+                
+                        <div class="col-12" style="display:flex;justify-content:space-around;padding:8px">
+                        <h4 style="font-family:italic;color:rgb(89, 88, 92)">Degree</h4>
+                        <h4 style="font-family:italic;color:rgb(10, 46, 87)">MBBS</h4>
+                              </div> 
+                                  </div>
+                                  <div class="modal-footer">
+                                  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                  
+                                  </div>
+                              </div>
+                              </div>
+                                </div>
+                                  
+                                </div>
+                      </td>
+                              <td>
+                                <a href="admin_view_accept/{{p.doctor_id }}" class="badge badge-inverse-success"> Accept </a>
+                                <a href="admin_view_reject/{{p.doctor_id }}" class="badge badge-inverse-success"> Reject </a>
+                              </td>
+                             </tr>
+                            
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+                
+                
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="row">
+                       <div class="col-6">
+                         <h1>Heading</h1>
+                       </div>
+                       <div class="col-6">
+                        <h1>Heading</h1>
+                      </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <footer class="footer">
+      
+            </footer>
+          </div>
+        <!-- main-panel ends -->
+      </div>

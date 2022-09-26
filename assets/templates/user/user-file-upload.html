@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+<title>Rights</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="HostSpace template project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{%static 'maincss/styles/bootstrap-4.1.2/bootstrap.min.css' %}">
+<link href="{%static 'maincss/plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{%static 'maincss/plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+<link rel="stylesheet" type="text/css" href="{%static 'maincss/plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+<link rel="stylesheet" type="text/css" href="{%static 'maincss/plugins/OwlCarousel2-2.2.1/animate.css' %}">
+<link href="{%static 'maincss/plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'maincss/styles/upload.css' %}">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'maincss/styles/responsive.css' %}">
+</head>
+
+<body>
+
+<div class="super_container">
+	
+	<!-- Header -->
+
+	<header class="header trans_400">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="header_content d-flex flex-row align-items-center justify-content-end trans_400">
+						<div class="logo"><a href="#">Host<span>Space</span></a></div>
+						<nav class="main_nav ml-auto ">
+							<ul class="d-flex flex-row align-items-center justify-content-start">
+								<li class=""><a href="{% url 'user-index' %}">Home</a></li>
+								<li class=""><a href="{% url 'user-profile' %}">Profile</a></li>
+								<li class=""><a href="{% url 'user-file-rights' %}">My Rights</a></li>
+                                <li class="active"><a href="{% url 'user-file-upload' %}">Upload</a></li>
+								<li class=""><a href="{% url 'user-file-download' %}">Download</a></li>
+								<li><a href="{% url 'index' %}">Logout</a></li>
+							</ul>
+						</nav>
+						<div class="hamburger ml-auto"><i class="fa fa-bars" aria-hidden="true"></i></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<!-- Menu -->
+	
+	<div class="menu_overlay trans_400"></div>
+	<div class="menu trans_400">
+		<div class="menu_close_container"><div class="menu_close"><div></div><div></div></div></div>
+		<div class="log_reg">
+			<div class="log_reg_content d-flex flex-row align-items-center justify-content-end">
+				<div class=""><a href="#" style="color:white;font-weight:bold;font-size:23px;">Host<span style="color:aqua">Space</span></a></div>
+			</div>
+		</div>
+		<nav class="menu_nav">
+			<ul>
+				<li class=""><a href="user-index.html">Home</a></li>
+				<li class=""><a href="user-profile.html">Profile</a></li>
+				<li class=""><a href="user-file-rights.html">My Rights</a></li>
+				<li class="active"><a href="user-file-upload.html">Upload</a></li>
+				<li class=""><a href="user-file-download.html">Download</a></li>
+				<li><a href="index.html">Logout</a></li>
+			</ul>
+		</nav>
+	</div>
+
+	<!-- Home -->
+
+	<div class="home">
+		<div class="home_background"></div>
+		<div class="background_image background_city" style="background-image:url({% static 'maincss/images/city.png' %})"></div>
+		<div class="cloud cloud_1"><img src="{% static 'maincss/images/cloud.png' %}" alt=""></div>
+		<div class="cloud cloud_2"><img src="{% static 'maincss/images/cloud.png' %}" alt=""></div>
+		<div class="cloud cloud_3"><img src="{% static 'maincss/images/cloud_full.png' %}" alt=""></div>
+		<div class="cloud cloud_4"><img src="{% static 'maincss/images/cloud.png' %}" alt=""></div>
+		
+	</div>
+
+	<!-- Intro -->
+
+	
+	<!-- Services -->
+<section>
+	<div class="services mt-5 mb-5 " style="back">
+		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{% static 'maincss/images/news_3.jpg' %}" data-speed="0.8"></div>
+		<div class="container">
+			
+			<div class="row">
+				<div class="col magic_fade_in">
+					<div class="section_title text-center"><h2 class="m-3">Upload</h2></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12 col-md-6 ml-auto mr-auto">
+					
+						<div class="service d-flex flex-column align-items-center justify-content-start text-center trans_200">
+							<div class="service_icon"><img class="svg" src="{% static 'maincss/images/icon_4.svg' %}" alt="https://www.flaticon.com/authors/freepik"></div>
+							<div class="service_title"><h3>Upload file</h3></div>
+							<!--  -->
+							<div class="contact_container">
+								<form action="#" id="contact_form"  method="POST"  enctype="multipart/form-data"  class="contact_form">
+									{% csrf_token %}
+									{% if messages %}              
+								{% for message in messages %}
+								{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+									<script>swal({
+									title: "Error!",
+									text: "{{message}}",
+									icon: "warning",
+									button: "OK",
+									});
+									</script>
+									   
+									{% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+										<script>swal({
+										title: "Success :)",
+										text: "{{message}}",
+										icon: "success",
+										button: "OK",
+										});
+									</script>
+									{% endif %}              
+								{% endfor %} 
+								{% endif %}
+									
+									<div class="row">
+										<div class="col-8 mt-4">
+										  <input class="contact_input pt-2" name="file"  type="file" placeholder="Message" required="required"></input>
+									    </div>
+										<div class="col-4">
+										  <button class="contact_button" type="submit">Submit</button>
+									    </div>
+									</div>	
+								</form>
+							</div>
+							<!--  -->		
+							
+						</div>
+						
+				
+				</div>
+			</div>
+			
+			
+		</div>
+	</div>
+</section>
+
+	<!-- Pricing -->
+
+	
+	<!-- CTA -->
+
+	
+	<!-- Footer -->
+
+	<footer class="footer magic_fade_in">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 footer_col">
+					<div class="footer_links">
+						<div class="row">
+							<div class="col-sm-6 col-md-3 footer_list_col magic_fade_in">
+								<div class="footer_list_container">
+									<div class="footer_list_title">Hosting Options</div>
+									<ul class="footer_list">
+										<li><a href="#">Web Hosting</a></li>
+										<li><a href="#">WordPress Hosting</a></li>
+										<li><a href="#">VPS Hosting</a></li>
+										<li><a href="#">Cloud Server</a></li>
+										<li><a href="#">Reseller Package</a></li>
+										<li><a href="#">Dedicated Hosting</a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-sm-6 col-md-3 footer_list_col magic_fade_in">
+								<div class="footer_list_container">
+									<div class="footer_list_title">Domains</div>
+									<ul class="footer_list">
+										<li><a href="#">Buy a Domain</a></li>
+										<li><a href="#">Premium Domain Names</a></li>
+										<li><a href="#">Web Hosting</a></li>
+										<li><a href="#">Transfer Your Domain</a></li>
+										<li><a href="#">Domain Marketplace</a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-sm-6 col-md-3 footer_list_col magic_fade_in">
+								<div class="footer_list_container">
+									<div class="footer_list_title">Resellers</div>
+									<ul class="footer_list">
+										<li><a href="#">VPS Hosting</a></li>
+										<li><a href="#">Cloud Server</a></li>
+										<li><a href="#">Reseller Package</a></li>
+										<li><a href="#">Dedicated Hosting</a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-sm-6 col-md-3 footer_list_col magic_fade_in">
+								<div class="footer_list_container">
+									<div class="footer_list_title">Support</div>
+									<ul class="footer_list">
+										<li><a href="#">Buy a Domain</a></li>
+										<li><a href="#">Premium Domain Names</a></li>
+										<li><a href="#">Web Hosting</a></li>
+									</ul>
+								</div>	
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</footer>
+</div>
+
+<script src="{% static 'maincss/js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'maincss/styles/bootstrap-4.1.2/popper.js' %}"></script>
+<script src="{% static 'maincss/styles/bootstrap-4.1.2/bootstrap.min.js' %}"></script>
+<script src="{% static 'maincss/plugins/greensock/TweenMax.min.js' %}"></script>
+<script src="{% static 'maincss/plugins/greensock/TimelineMax.min.js' %}"></script>
+<script src="{% static 'maincss/plugins/scrollmagic/ScrollMagic.min.js' %}"></script>
+<script src="{% static 'maincss/plugins/greensock/animation.gsap.min.js' %}"></script>
+<script src="{% static 'maincss/plugins/greensock/ScrollToPlugin.min.js' %}"></script>
+<script src="{% static 'maincss/plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+<script src="{% static 'maincss/plugins/easing/easing.js' %}"></script>
+<script src="{% static 'maincss/plugins/progressbar/progressbar.min.js' %}"></script>
+<script src="{% static 'maincss/plugins/parallax-js-master/parallax.min.js' %}"></script>
+<script src="{% static 'maincss/js/custom.js' %}"></script>
+</body>
+</html>
